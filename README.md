@@ -1,6 +1,7 @@
 # 🛡️ Cybersecurity Bash Toolkit - Checker.sh
 
 Created by: Yarin Maimon
+
 A modular Bash-based cybersecurity toolkit for simulating attacks and validating SIEM/SOC alerting in authorized internal networks.
 
 > ⚠️ **Disclaimer**: This tool is for **educational purposes** and **authorized environments only**. Unauthorized use is strictly prohibited.
