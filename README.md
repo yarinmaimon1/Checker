@@ -1,127 +1,91 @@
-Checker Toolkit
+# 🛡️ Cybersecurity Bash Toolkit - Checker.sh
+
 Created by: Yarin Maimon
+A modular Bash-based cybersecurity toolkit for simulating attacks and validating SIEM/SOC alerting in authorized internal networks.
 
-Overview
+> ⚠️ **Disclaimer**: This tool is for **educational purposes** and **authorized environments only**. Unauthorized use is strictly prohibited.
 
-This is a modular Bash-based cybersecurity toolkit designed to assist in auditing, monitoring, and testing security controls in internal network environments. It provides a user-friendly interface for performing a variety of attacks and checks, simulating malicious activity to validate SIEM/SOC alerting mechanisms.
+---
 
-Disclaimer: This tool is meant for educational purposes and authorized testing environments only. Unauthorized use is strictly prohibited.
+## 📌 Features
 
-Features
+- 🔐 Brute Force Attacks (Hydra)
+- 🔍 Port Scanning & Service Detection (Nmap)
+- 🧅 Man-in-the-Middle (Arpspoof + TShark)
+- 📂 SMB/RDP/WinRM Enumeration (CrackMapExec)
+- 💥 Denial of Service Attack (hping3)
+- 🎲 Random Attack Selector
+- 🧠 Intelligent Service Detection
+- 📁 Comprehensive Logging
+- 🧰 Dynamic IP Target Selection
 
-Brute Force Attack (via Hydra)
+---
 
-Port Scanning & Service Detection (via Nmap)
+📂 Functions Overview
 
-Man-in-the-Middle Attack (via Arpspoof & TShark)
+🔐 BRUTE()
+ - Hydra-based brute force attack.
+ - User inputs username & password files and the target service.
+ - Results are logged.
 
-SMB/RDP/WinRM Enumeration (via CrackMapExec)
+🔍 NMAP()
+- Port scan using Nmap (-sV -sC).
+- Parses detected services and offers conditional brute forcing (e.g., SSH).
+- Saves results to ~/Checker/nmap.txt.
 
-Denial of Service Attack (via hping3)
+🧅 MiTM()
+- Man-in-the-Middle via Arpspoof and packet capture via TShark.
+- Runs for a user-defined time.
+- Saves packets as .pcap file.
 
-Random Attack Selection
+📂 SMBENUM()
+- CrackMapExec enumeration for SMB, RDP, or WinRM.
+- Supports credentialed or anonymous access.
+- Option to enumerate shares.
+- Auto-installs CrackMapExec if missing.
 
-Dynamic Network Target Selector
+💥 DOS_ATTACK()
+- SYN flood attack using hping3.
+- Runs for 15 seconds.
+- Logs outcome and warns the user beforehand.
 
-Comprehensive Logging
+📋 MENU()
+- Interactive main menu.
+- Option to run any module or random one.
+- Auto-installs pv for nice echo effects.
 
-Structure & Functionality
+📜 Logging
+- All actions are logged with:
+    ⏰ Timestamp
+    📌 Attack type
+    🎯 Target IP/service
+    ✅ Status (Completed, Aborted, Failed)
 
-BRUTE()
+🚀 Usage
+chmod +x checker.sh
+sudo ./checker.sh
+You’ll be greeted with a menu of attack options. Choose one and follow the prompts.
+* Use flags to skip prompts, --help and go from there
 
-Performs a brute force attack using Hydra.
+📁 Folder Structure
+~/Checker/
+├── nmap.txt
+├── cme_smb.txt
+├── MiTM.pcap
+└── checker.log
 
-Prompts the user for paths to a username and password file.
+👨‍💻 Author: Yarin Maimon
+Built for educational & SOC validation purposes. Perfect for cybersecurity students, red teamers, or those looking to learn offensive tools in a controlled setup.
 
-Optionally prompts for the service protocol (FTP, SSH, etc.).
+🧯 Legal Notice
+The author is not responsible for any misuse or damage caused by this tool. Use only in environments where you have explicit permission.
 
-Logs results to the toolkit's logfile.
+🔗 GitHub
+If this helped or inspired you, drop a ⭐ on the repo!
 
-NMAP()
+Let me know:
+- If you want to include badges (like tools used, Bash version, etc.)
+- If you'd like me to push this to a file and you can re-upload
+- Or if you’d like a **LinkedIn post template** now that you’re almost ready to publish!
 
-Scans the target for open ports and service versions.
-
-Uses nmap -sV -sC and stores output in ~/Checker/nmap.txt.
-
-Automatically parses detected services.
-
-Prompts the user to launch a brute force attack if SSH/FTP/Telnet is found.
-
-MiTM()
-
-Launches a Man-In-The-Middle attack.
-
-Uses arpspoof to redirect traffic between target and router.
-
-Captures packets using tshark.
-
-User-defined duration.
-
-Outputs .pcap file and logs status.
-
-SMBENUM()
-
-Enumerates Windows services using CrackMapExec.
-
-Supports SMB, RDP, and WinRM.
-
-Offers credentialed or anonymous scans.
-
-Can enumerate shares if desired.
-
-Auto-installs CrackMapExec if missing.
-
-Logs scan results to ~/Checker/.
-
-DOS_ATTACK()
-
-Performs a SYN flood attack with hping3.
-
-Asks for target IP and port.
-
-15-second flood duration.
-
-Logs attack outcome.
-
-Displays warning before execution.
-
-MENU()
-
-Main user interface.
-
-Offers six options (five attack types + random).
-
-Automatically installs pv if missing.
-
-Startup Logic
-
-Creates ~/Checker directory.
-
-Initializes logfile if missing.
-
-Executes any set $RUN_* environment variables before showing the menu.
-
-Logging
-
-All actions are logged with:
-
-Timestamp
-
-Module name
-
-Target IP and details
-
-Execution status (Completed, Aborted, Failed)
-
-Sample Execution
-
-chmod +x Checker.sh
-sudo ./Checker.sh
-
-Legal Notice
-
-Usage of this tool is strictly limited to environments where you have explicit authorization. The authors are not responsible for misuse or damages resulting from the use of this software.
-
-Author
-
-Developed as part of a cybersecurity toolkit project to simulate attacker techniques and validate defensive controls.
+What’s next? 😎
